@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: denmit
+  - include:
+      file: data/001_create_user_id_sequence.sql
+      relativeToChangelogFile: true
+  - include:
+      file: data/002_create_users_table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: data/003_insert_users_table.sql
+      relativeToChangelogFile: true

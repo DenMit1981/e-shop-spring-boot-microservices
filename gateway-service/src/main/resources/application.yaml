@@ -1,0 +1,172 @@
+spring:
+ main:
+   web-application-type: reactive
+ config:
+    import: 'optional:configserver:'
+ cloud:
+   gateway:
+     default-filters:
+       - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+     routes:
+       - id: authentication-service
+         uri: lb://authentication-service
+         predicates:
+           - Path=/api/v1/auth/**, /api/v1/users/**
+       - id: goods-service
+         uri: lb://goods-service
+         predicates:
+           - Path=/api/v1/goods/**
+         filters:
+           - AuthenticationFilter
+       - id: order-service
+         uri: lb://order-service
+         predicates:
+           - Path=/api/v1/carts/**, /api/v1/orders/**
+         filters:
+           - AuthenticationFilter
+       - id: payment-service
+         uri: lb://payment-service
+         predicates:
+           - Path=/api/v1/payments/**, /api/v1/receipts/**
+         filters:
+           - AuthenticationFilter
+       - id: history-service
+         uri: lb://history-service
+         predicates:
+           - Path=/api/v1/history/**
+         filters:
+           - AuthenticationFilter
+       - id: attachment-service
+         uri: lb://attachment-service
+         predicates:
+           - Path=/api/v1/attachments/**
+         filters:
+           - AuthenticationFilter
+       - id: comment-service
+         uri: lb://comment-service
+         predicates:
+           - Path=/api/v1/comments/**
+         filters:
+           - AuthenticationFilter
+       - id: feedback-service
+         uri: lb://feedback-service
+         predicates:
+           - Path=/api/v1/feedbacks/**
+         filters:
+           - AuthenticationFilter
+       - id: open-api-authentication-service
+         uri: lb://authentication-service
+         predicates:
+           - Path=/authentication-service/**
+       - id: open-api-goods-service
+         uri: lb://goods-service
+         predicates:
+           - Path=/goods-service/**
+       - id: open-api-order-service
+         uri: lb://order-service
+         predicates:
+           - Path=/order-service/**
+       - id: open-api-payment-service
+         uri: lb://payment-service
+         predicates:
+           - Path=/payment-service/**
+       - id: open-api-history-service
+         uri: lb://history-service
+         predicates:
+           - Path=/history-service/**
+       - id: open-api-attachment-service
+         uri: lb://attachment-service
+         predicates:
+           - Path=/attachment-service/**
+       - id: open-api-comment-service
+         uri: lb://comment-service
+         predicates:
+           - Path=/comment-service/**
+       - id: open-api-feedback-service
+         uri: lb://feedback-service
+         predicates:
+           - Path=/feedback-service/**
+     globalcors:
+       add-to-simple-url-handler-mapping: true
+       cors-configurations:
+         '[/**]':
+           allowedOrigins: "null"
+           allowedMethods: "*"
+           allowedHeaders: "*"
+           allow-credentials: true
+   management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+
+ application:
+  name: gateway-service
+server:
+  port: 8080
+jwt:
+  secret: c2Rmc2RmZHNmc2Rmc2RmZHNmc2Rmc2Rmsdffffffffsdfsdfsdf878787sd8f7s7df78sd87f78sdf87
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+    enabled: true
+  swagger-ui:
+    config-url: /v3/api-docs/swagger-config
+    url: /v3/api-docs
+    urls:
+      - url: /authentication-service/v3/api-docs
+        name: authentication-service
+      - url: /goods-service/v3/api-docs
+        name: goods-service
+      - url: /order-service/v3/api-docs
+        name: order-service
+      - url: /payment-service/v3/api-docs
+        name: payment-service
+      - url: /history-service/v3/api-docs
+        name: history-service
+      - url: /attachment-service/v3/api-docs
+        name: attachment-service
+      - url: /comment-service/v3/api-docs
+        name: comment-service
+      - url: /feedback-service/v3/api-docs
+        name: feedback-service
+  group-configs:
+    - group: authentication-service
+      paths-to-match:
+        - /authentication-service/**
+      display-name: authentication-service
+    - group: goods-service
+      paths-to-match:
+        - /goods-service/**
+      display-name: goods-service
+    - group: order-service
+      paths-to-match:
+        - /order-service/**
+      display-name: order-service
+    - group: payment-service
+      paths-to-match:
+        - /payment-service/**
+      display-name: payment-service
+    - group: history-service
+      paths-to-match:
+        - /history-service/**
+      display-name: history-service
+    - group: attachment-service
+      paths-to-match:
+        - /attachment-service/**
+      display-name: attachment-service
+    - group: comment-service
+      paths-to-match:
+        - /comment-service/**
+      display-name: comment-service
+    - group: feedback-service
+      paths-to-match:
+        - /feedback-service/**
+      display-name: feedback-service

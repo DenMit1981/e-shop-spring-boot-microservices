@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>https://www.online-shop.com</title>
+</head>
+<body>
+<h2>Dear <span th:text="${login}"></span>!</h2>
+<h3>Order <span th:text="${orderId}"></span> was paid successfully
+
+</h3>
+<h4>Receipt number: <span th:text="${receipt}"></span><br/>
+    <a th:href="${receiptUrl}" th:text="${fileName}">Download your receipt</a>
+</h4>
+</body>
+</html>
+

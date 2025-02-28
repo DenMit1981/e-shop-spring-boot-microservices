@@ -1,0 +1,1 @@
+INSERT INTO receiver(id, name, card_number, card_brand, bank_account) VALUES(1, 'E-shop', '4111 1111 1111 1111', 'VISA', 'GB29NWBK60161331926819');

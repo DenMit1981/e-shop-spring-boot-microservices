@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: denmit
+  - include:
+      file: data/001_create_feedback_id_sequence.sql
+      relativeToChangelogFile: true
+  - include:
+      file: data/002_create_feedbacks_table.sql
+      relativeToChangelogFile: true

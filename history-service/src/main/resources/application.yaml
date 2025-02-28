@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: history-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/history
+    username: test
+    password: test
+    hikari:
+      maximum-pool-size: 2
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+  liquibase:
+    enabled: true
+    drop-first: true
+    change-log: classpath:db/changelog/db-changelog-master.yaml
+    default-schema: public
+    contexts: migrated
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: public
+  config:
+    import: 'optional:configserver:'
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+  permitted:
+    url:
+      http://localhost:3000/**
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+jwt:
+  secret: c2Rmc2RmZHNmc2Rmc2RmZHNmc2Rmc2Rmsdffffffffsdfsdfsdf878787sd8f7s7df78sd87f78sdf87
+security:
+  permitted:
+    urls: /history-service/**
+server:
+  port: 8084
+logging:
+  level:
+    -root: INFO
+springdoc:
+  api-docs:
+    path: /history-service/v3/api-docs
+  swagger-ui:
+    path: /history-service/swagger-ui.html
+openapi:
+  service:
+    url: http://localhost:8084
+

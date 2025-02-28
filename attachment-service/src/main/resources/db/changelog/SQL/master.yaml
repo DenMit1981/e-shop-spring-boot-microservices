@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: denmit
+  - include:
+      file: data/001_create_attachment_id_sequence.sql
+      relativeToChangelogFile: true
+  - include:
+      file: data/002_create_attachments_table.sql
+      relativeToChangelogFile: true

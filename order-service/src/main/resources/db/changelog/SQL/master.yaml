@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: denmit
+  - include:
+      file: data/001_create_cart_id_sequence.sql
+      relativeToChangelogFile: true
+  - include:
+      file: data/002_create_order_id_sequence.sql
+      relativeToChangelogFile: true
+  - include:
+      file: data/003_create_carts_table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: data/004_create_cart_products_table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: data/005_create_orders_table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: data/006_create_order_products_table.sql
+      relativeToChangelogFile: true
